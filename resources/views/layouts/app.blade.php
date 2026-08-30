@@ -5,28 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NurseConnect</title>
+
+    <!-- Vite Assets (Tailwind CSS v4 & JS) -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Bootstrap 5 CSS & Icons (opsional untuk komponen Bootstrap) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
     <style>
-        /* TEMA WARNA KOMPLEMENTER (Biru & Oranye) */
+        /* TEMA WARNA HIJAU & ORANGE (Sesuai Landing Page & Tailwind Config) */
         :root {
-            --nc-blue: #0A426F;
-            /* Biru Gelap Utama */
-            --nc-orange: #F27C38;
-            /* Oranye Komplementer */
-            --nc-light: #F4F7F6;
-            /* Background Abu-abu terang */
+            --nc-green: #7CA982;
+            /* Hijau Utama */
+            --nc-green-dark: #5c8061;
+            /* Hijau Gelap */
+            --nc-orange: #F4A261;
+            /* Orange Accent */
+            --nc-orange-hover: #e09050;
+            /* Orange Hover */
+            --nc-light: #F9F9FB;
+            /* Background Abu Terang */
             --nc-soft-orange: #FFF0E6;
-            /* Background soft untuk card */
+            /* Soft Orange */
         }
 
         body {
             background-color: var(--nc-light);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
         }
 
-        /* Utility Classes Custom */
+        /* Utility Classes Custom Bootstrap Override */
         .text-primary-custom {
-            color: var(--nc-blue) !important;
+            color: var(--nc-green) !important;
         }
 
         .text-accent {
@@ -34,7 +45,7 @@
         }
 
         .bg-primary-custom {
-            background-color: var(--nc-blue) !important;
+            background-color: var(--nc-green) !important;
             color: white;
         }
 
@@ -47,17 +58,16 @@
             background-color: var(--nc-soft-orange) !important;
         }
 
-        /* Bentuk Membulat khas referensi (Pill & Rounded Cards) */
         .btn-custom {
             border-radius: 50px;
             font-weight: 600;
             padding: 10px 24px;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             border: none;
         }
 
         .btn-custom:hover {
-            opacity: 0.8;
+            opacity: 0.9;
             transform: translateY(-2px);
         }
 
@@ -75,32 +85,18 @@
     </style>
 </head>
 
-<body>
+<body class="flex flex-col min-h-screen">
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3" style="border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary-custom fs-4" href="{{ url('/') }}">NurseConnect.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto bg-light rounded-pill px-3 py-1">
-                    <li class="nav-item"><a class="nav-link px-3 {{ request()->is('/') ? 'fw-bold text-dark' : 'text-muted' }}" href="{{ url('/') }}">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 {{ request()->is('directory') ? 'fw-bold text-dark' : 'text-muted' }}" href="{{ url('/directory') }}">Cari Perawat</a></li>
-                    <li class="nav-item"><a class="nav-link px-3 {{ request()->is('perawat-terdekat') ? 'fw-bold text-dark' : 'text-muted' }}" href="{{ url('/perawat-terdekat') }}">Perawat Terdekat</a></li>
-                </ul>
-                <div class="d-flex mt-3 mt-lg-0">
-                    <a href="{{ route('login') }}" class="btn text-primary-custom fw-bold me-2">Masuk</a>
-                    <a href="{{ route('register') }}" class="btn btn-custom bg-primary-custom shadow-sm">Daftar</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <!-- Memanggil Komponen Navbar Blade -->
+    @include('components.navbar')
 
-    <main class="container my-4">
+    <!-- Konten Utama Halaman -->
+    <main class="container my-4 flex-grow-1">
         @yield('content')
     </main>
+
+    <!-- Memanggil Komponen Footer Blade -->
+    @include('components.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
