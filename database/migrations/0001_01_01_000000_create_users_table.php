@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // Tambahkan baris ini untuk menyimpan role
+            $table->string('role')->default('patient');
             $table->rememberToken();
             $table->timestamps();
         });

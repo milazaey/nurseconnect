@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class DirectoryController extends Controller
 {
@@ -11,8 +12,9 @@ class DirectoryController extends Controller
         return view('public.directory');
     }
 
-    public function show($id)
+    // --- TAMBAHKAN METHOD INI ---
+    public function nearby()
     {
-        return view('public.nurse-detail');
+        return view('public.nearby');
     }
 }

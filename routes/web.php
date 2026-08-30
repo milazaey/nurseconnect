@@ -14,9 +14,12 @@ Route::get('/directory', [DirectoryController::class, 'index']);
 Route::get('/nurse/{id}', [DirectoryController::class, 'show']);
 
 // --- 2. AUTH ROUTES ---
-Route::get('/login', [AuthController::class, 'showLogin']);
-Route::get('/register/patient', [AuthController::class, 'showRegisterPatient']);
-Route::get('/register/nurse', [AuthController::class, 'showRegisterNurse']);
+// Ubah menjadi seperti ini agar sesuai dengan view dan controller
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'processLogin']); // Tambahan untuk proses form
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'processRegister']); // Tambahan untuk proses form
 
 // --- 3. PATIENT ROUTES ---
 Route::prefix('patient')->middleware(['auth'])->group(function () {
@@ -32,3 +35,6 @@ Route::prefix('nurse')->middleware(['auth'])->group(function () {
 Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index']);
 });
+
+// Route untuk halaman Perawat Terdekat
+Route::get('/perawat-terdekat', [DirectoryController::class, 'nearby']);
