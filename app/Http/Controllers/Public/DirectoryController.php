@@ -8,11 +8,11 @@ class DirectoryController extends Controller
 {
     public function index()
     {
-        return view('directory');
+        return view('public.directory');
     }
 
     public function show($id)
     {
-        return view('nurse-detail');
+        return view('public.nurse-detail');
     }
 }
