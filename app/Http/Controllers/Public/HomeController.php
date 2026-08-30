@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('landing'); // sesuaikan nama view lu
+        return view('public.landing'); // sesuaikan nama view lu
     }
 }
