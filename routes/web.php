@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
 });
 
 // Logout bisa dipanggil pake GET untuk mempermudah development (kalau di production mending pakai POST)
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Rute Dashboard (Hanya bisa diakses kalau udah login)
 Route::middleware('auth')->group(function () {
