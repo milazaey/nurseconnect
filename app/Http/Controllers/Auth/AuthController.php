@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -17,17 +20,64 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    // Tambahkan method ini untuk menangani form POST Login
+    // Proses Login
     public function processLogin(Request $request)
     {
-        // Nanti kamu bisa isi logika validasi dan Auth::attempt di sini
-        return redirect('/patient/dashboard'); // Sementara redirect ke sini
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            // Redirect sesuai role
+            $role = Auth::user()->role;
+            if ($role === 'admin') return redirect('/admin/dashboard');
+            if ($role === 'nurse') return redirect('/nurse/dashboard');
+
+            return redirect('/patient/dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'Email atau password salah.',
+        ]);
     }
 
-    // Tambahkan method ini untuk menangani form POST Register
+    // Proses Register
     public function processRegister(Request $request)
     {
-        // Nanti kamu bisa isi logika validasi dan User::create() di sini
-        return redirect('/login'); // Sementara redirect ke login
+        // 1. Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'role' => 'required|string|in:patient,nurse,admin',
+            'password' => 'required|string|min:8|confirmed', // Pastikan ada password_confirmation di view
+        ]);
+
+        // 2. Simpan user ke database
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password),
+        ]);
+
+        // 3. Auto-login setelah register
+        Auth::login($user);
+
+        // 4. Redirect sesuai role yang didaftarkan
+        if ($user->role === 'admin') return redirect('/admin/dashboard');
+        if ($user->role === 'nurse') return redirect('/nurse/dashboard');
+        return redirect('/patient/dashboard');
+    }
+
+    // Proses Logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

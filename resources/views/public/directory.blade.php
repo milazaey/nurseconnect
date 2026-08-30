@@ -1,131 +1,77 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-base-bg min-h-screen py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="container py-4">
+    <!-- Header & Search Bar -->
+    <div class="card card-rounded shadow-sm border-0 bg-primary-custom text-white p-5 mb-5 mt-3 text-center">
+        <h2 class="fw-bold mb-3">Temukan Perawat Terbaik Untuk Anda</h2>
+        <p class="mb-4">Cari berdasarkan nama, spesialisasi, atau lokasi terdekat.</p>
 
-        <!-- Header Halaman -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-text-dark">Direktori & Smart Search Perawat</h1>
-            <p class="text-gray-500 text-sm mt-1">Temukan perawat tersertifikasi terdekat sesuai kebutuhan medis keluarga Anda.</p>
+        <form action="#" method="GET" class="d-flex flex-column flex-md-row gap-2 justify-content-center mx-auto" style="max-width: 800px;">
+            <input type="text" name="search" class="form-control form-control-lg rounded-pill px-4" placeholder="Cari nama perawat...">
+            <select name="spesialisasi" class="form-select form-select-lg rounded-pill px-4">
+                <option value="">Semua Spesialisasi</option>
+                <option value="lansia">Perawatan Lansia</option>
+                <option value="pasca-operasi">Pasca Operasi</option>
+                <option value="bayi">Perawatan Bayi & Anak</option>
+                <option value="umum">Perawatan Umum</option>
+            </select>
+            <button type="submit" class="btn btn-custom bg-accent text-white px-5 rounded-pill shadow-sm">Cari</button>
+        </form>
+    </div>
+
+    <!-- Hasil Pencarian / List Perawat -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold text-primary-custom">Hasil Pencarian (12 Perawat)</h4>
+        <a href="{{ route('nearby') }}" class="btn btn-outline-primary rounded-pill">📍 Lihat yang Terdekat</a>
+    </div>
+
+    <div class="row g-4">
+        <!-- Card Perawat 1 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card card-rounded shadow-sm border-0 h-100">
+                <img src="https://images.unsplash.com/photo-1594824813566-7885a3964478?auto=format&fit=crop&q=80&w=400"
+                    class="card-img-top" alt="Nurse" style="height: 220px; object-fit: cover; border-top-left-radius: 24px; border-top-right-radius: 24px;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="fw-bold text-primary-custom mb-0">Ns. Sarah Amalia, S.Kep</h5>
+                        <span class="badge bg-success rounded-pill">⭐ 4.9</span>
+                    </div>
+                    <p class="text-accent fw-bold small mb-3">Spesialis Perawatan Lansia</p>
+
+                    <ul class="list-unstyled text-muted small mb-4">
+                        <li class="mb-1"><i class="bi bi-geo-alt"></i> Jakarta Selatan (Bisa ke rumah)</li>
+                        <li class="mb-1"><i class="bi bi-briefcase"></i> Pengalaman 5 Tahun</li>
+                        <li><i class="bi bi-card-checklist"></i> STR Aktif</li>
+                    </ul>
+
+                    <!-- Link mengarah ke halaman detail -->
+                    <a href="{{ url('/directory/1') }}" class="btn btn-custom bg-primary-custom w-100 shadow-sm">Lihat Profil & Jadwal</a>
+                </div>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-
-            <!-- PANEL FILTER (Kiri) -->
-            <div class="lg:col-span-1 bg-white p-6 rounded-3xl border border-gray-100 shadow-sm h-fit space-y-6">
-                <h2 class="font-bold text-lg text-text-dark border-b pb-3">Filter Pencarian</h2>
-
-                <!-- Filter Jarak -->
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">Jarak Maksimal</label>
-                    <select class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm text-text-dark focus:outline-none focus:border-primary">
-                        <option value="5"> s/d 5 Km (Terdekat)</option>
-                        <option value="10"> s/d 10 Km</option>
-                        <option value="20"> s/d 20 Km</option>
-                    </select>
-                </div>
-
-                <!-- Filter Jenis Tindakan -->
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">Jenis Layanan</label>
-                    <div class="space-y-2 text-sm text-text-dark">
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" checked class="rounded text-primary focus:ring-primary">
-                            <span>Rawat Pasca-Inap</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" checked class="rounded text-primary focus:ring-primary">
-                            <span>Pendampingan Lansia</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
-                            <span>Ganti Perban / Luka</span>
-                        </label>
-                        <label class="flex items-center gap-2 cursor-pointer">
-                            <input type="checkbox" class="rounded text-primary focus:ring-primary">
-                            <span>Pasang Infus / Catheter</span>
-                        </label>
+        <!-- Card Perawat 2 -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card card-rounded shadow-sm border-0 h-100">
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400"
+                    class="card-img-top" alt="Nurse" style="height: 220px; object-fit: cover; border-top-left-radius: 24px; border-top-right-radius: 24px;">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="fw-bold text-primary-custom mb-0">Bagus Rian, A.Md.Kep</h5>
+                        <span class="badge bg-success rounded-pill">⭐ 4.8</span>
                     </div>
-                </div>
+                    <p class="text-accent fw-bold small mb-3">Perawatan Umum & Luka</p>
 
-                <!-- Filter Slot Jam Kerja -->
-                <div>
-                    <label class="block text-xs font-semibold text-gray-600 uppercase mb-2">Ketersediaan Slot</label>
-                    <select class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-sm text-text-dark focus:outline-none focus:border-primary">
-                        <option>Semua Slot Waktu</option>
-                        <option>Pagi (08.00 - 12.00)</option>
-                        <option>Siang (13.00 - 17.00)</option>
-                        <option>Malam (18.00 - 21.00)</option>
-                    </select>
-                </div>
+                    <ul class="list-unstyled text-muted small mb-4">
+                        <li class="mb-1"><i class="bi bi-geo-alt"></i> Jakarta Barat (Bisa ke rumah)</li>
+                        <li class="mb-1"><i class="bi bi-briefcase"></i> Pengalaman 3 Tahun</li>
+                        <li><i class="bi bi-card-checklist"></i> STR Aktif</li>
+                    </ul>
 
-                <button class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2.5 rounded-xl text-sm transition-all shadow-sm">
-                    Terapkan Filter
-                </button>
+                    <a href="{{ url('/directory/2') }}" class="btn btn-custom bg-primary-custom w-100 shadow-sm">Lihat Profil & Jadwal</a>
+                </div>
             </div>
-
-            <!-- NURSES LISTING (Kanan) -->
-            <div class="lg:col-span-3 space-y-4">
-
-                <!-- Card Perawat 1 -->
-                <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center gap-6 hover:border-primary/50 transition-all">
-                    <img src="https://images.unsplash.com/photo-1594824813566-7885a3964478?auto=format&fit=crop&q=80&w=200" alt="Nurse" class="w-24 h-24 rounded-2xl object-cover shrink-0">
-
-                    <div class="flex-grow space-y-2 text-center sm:text-left">
-                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                            <h3 class="font-bold text-lg text-text-dark">Ns. Sarah Amalia, S.Kep</h3>
-                            <span class="bg-emerald-50 text-emerald-600 border border-emerald-200 text-xs px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
-                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Verified STR
-                            </span>
-                        </div>
-                        <p class="text-xs text-gray-500">Lulusan S1 Keperawatan • Pengalaman 2 Tahun</p>
-
-                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-gray-600 pt-1">
-                            <span class="flex items-center gap-1">📍 1.2 km dari Anda</span>
-                            <span class="flex items-center gap-1">⭐ 4.9 (28 Sesi)</span>
-                            <span class="font-bold text-primary">Rp 150.000 / Sesi</span>
-                        </div>
-                    </div>
-
-                    <a href="/nurse/1" class="shrink-0 bg-accent hover:bg-accent-hover text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all shadow-sm">
-                        Lihat Slot & Detail
-                    </a>
-                </div>
-
-                <!-- Card Perawat 2 -->
-                <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex flex-col sm:flex-row items-center gap-6 hover:border-primary/50 transition-all">
-                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=200" alt="Nurse" class="w-24 h-24 rounded-2xl object-cover shrink-0">
-
-                    <div class="flex-grow space-y-2 text-center sm:text-left">
-                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-                            <h3 class="font-bold text-lg text-text-dark">Bagus Rian, A.Md.Kep</h3>
-                            <span class="bg-emerald-50 text-emerald-600 border border-emerald-200 text-xs px-2.5 py-0.5 rounded-full font-semibold flex items-center gap-1">
-                                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                </svg>
-                                Verified STR
-                            </span>
-                        </div>
-                        <p class="text-xs text-gray-500">Fresh Graduate D3 Keperawatan • Spesialis Medis Ringan</p>
-
-                        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-gray-600 pt-1">
-                            <span class="flex items-center gap-1">📍 3.5 km dari Anda</span>
-                            <span class="flex items-center gap-1">⭐ 5.0 (12 Sesi)</span>
-                            <span class="font-bold text-primary">Rp 120.000 / Sesi</span>
-                        </div>
-                    </div>
-
-                    <a href="/nurse/1" class="shrink-0 bg-accent hover:bg-accent-hover text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all shadow-sm">
-                        Lihat Slot & Detail
-                    </a>
-                </div>
-
-            </div>
-
         </div>
     </div>
 </div>

@@ -1,25 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="bg-base-bg min-h-screen py-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-text-dark">HRD & Admin Control Panel</h1>
-            <p class="text-gray-500 text-sm mt-1">Verifikasi berkas perawat dan pantau transaksi platform.</p>
-        </div>
+<div class="container py-4">
+    <div class="mb-4 mt-2">
+        <h3 class="fw-bold text-primary-custom mb-0">Admin Control Panel ⚙️</h3>
+        <p class="text-muted">Pantau aktivitas sistem NurseConnect hari ini.</p>
+    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p class="text-sm font-semibold text-gray-500">Total Pasien</p>
-                <p class="text-3xl font-bold text-text-dark mt-2">124</p>
+    <!-- Statistik Sistem -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card card-rounded shadow-sm border-0 p-4 bg-primary-custom text-white">
+                <p class="mb-1">Total Pasien</p>
+                <h2 class="fw-bold mb-0">1,204</h2>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p class="text-sm font-semibold text-gray-500">Perawat Aktif</p>
-                <p class="text-3xl font-bold text-primary mt-2">45</p>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-rounded shadow-sm border-0 p-4 bg-accent text-white">
+                <p class="mb-1">Perawat Terdaftar</p>
+                <h2 class="fw-bold mb-0">342</h2>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 border-l-4 border-l-accent">
-                <p class="text-sm font-semibold text-gray-500">Menunggu Verifikasi STR</p>
-                <p class="text-3xl font-bold text-accent mt-2">3</p>
+        </div>
+        <div class="col-md-4">
+            <div class="card card-rounded shadow-sm border-0 p-4 bg-light border-start border-4 border-warning">
+                <p class="mb-1 text-muted">Pesanan Aktif Hari Ini</p>
+                <h2 class="fw-bold text-dark mb-0">58</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menunggu Verifikasi -->
+    <h5 class="fw-bold text-primary-custom mb-3">Perawat Menunggu Verifikasi (STR)</h5>
+    <div class="card card-rounded shadow-sm border-0 p-4">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+            <div>
+                <h6 class="fw-bold mb-1">Rizky Febrian, S.Kep</h6>
+                <p class="text-muted small mb-0">Mendaftar 2 jam yang lalu</p>
+            </div>
+            <div>
+                <button class="btn btn-sm btn-success me-2">Setujui</button>
+                <button class="btn btn-sm btn-outline-danger">Tolak</button>
             </div>
         </div>
     </div>
