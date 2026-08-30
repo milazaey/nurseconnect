@@ -28,3 +28,16 @@
             }
         }
     </script>
+</head>
+
+<body class="bg-base-bg font-sans antialiased text-text-dark flex flex-col min-h-screen">
+    @include('components.navbar')
+
+    <main class="flex-grow">
+        @yield('content')
+    </main>
+
+    @include('components.footer')
+</body>
+
+</html>

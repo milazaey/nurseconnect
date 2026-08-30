@@ -11,13 +11,8 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function showRegisterPatient()
+    public function showRegister()
     {
-        return view('auth.register-patient');
-    }
-
-    public function showRegisterNurse()
-    {
-        return view('auth.register-nurse');
+        return view('auth.register');
     }
 }
